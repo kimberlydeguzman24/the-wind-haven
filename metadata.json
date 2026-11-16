@@ -1,6 +1,6 @@
 {
-  "name": "Haven & Co. Realty",
-  "description": "Thoughtful property. Confident decisions. Premium real estate agency serving Pampanga, Philippines.",
+  "name": "The Wind Haven",
+  "description": "Private accommodation at SMDC Wind Residences in Tagaytay City, Philippines.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

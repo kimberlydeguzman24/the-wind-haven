@@ -1,20 +1,26 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# The Wind Haven
 
-# Run and deploy your AI Studio app
+The Wind Haven is a private accommodation website for SMDC Wind Residences in Tagaytay City, Philippines.
 
-This contains everything you need to run your app locally.
+## Requirements
 
-View your app in AI Studio: https://ai.studio/apps/51235d24-c39d-440a-954b-6823df2b6869
+- Node.js 20.19 or newer in the Node 20 line, or Node.js 22.12 or newer
+- npm
 
-## Run Locally
+## Run locally
 
-**Prerequisites:**  Node.js
+```sh
+npm install
+npm run dev
+```
 
+Vite serves the site at `http://localhost:3000`.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Build
+
+```sh
+npm run build
+npm run preview
+```
+
+The contact and newsletter forms are clearly labeled previews. They do not transmit submissions or subscribe visitors to a mailing list.

@@ -1,0 +1,331 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-forest: #183D32;
+  --color-deep-forest: #102B24;
+  --color-ivory: #F7F5EF;
+  --color-cream: #EEE9DE;
+  --color-sage: #A8B5A0;
+  --color-beige: #E3DDD0;
+  --color-charcoal: #252824;
+}
+
+:root {
+  font-family: var(--font-sans);
+  background-color: #F7F5EF;
+  color: #252824;
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    scroll-padding-top: 5.5rem;
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+/* Fluid typographic scaling across 320px mobile to 1440px desktop */
+.heading-section {
+  font-size: clamp(1.75rem, 1.35rem + 1.85vw, 3rem);
+  line-height: 1.15;
+}
+
+.heading-sub {
+  font-size: clamp(1.45rem, 1.15rem + 1.3vw, 2.25rem);
+  line-height: 1.2;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+html.scroll-locked,
+html.scroll-locked body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scrollCueSlide {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  50% {
+    transform: translate3d(0, 0%, 0);
+  }
+  100% {
+    transform: translate3d(0, 110%, 0);
+  }
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-zoom {
+  animation: heroZoom 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-stagger-1,
+.hero-stagger-2,
+.hero-stagger-3,
+.hero-stagger-4 {
+  animation: heroFadeUp 580ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-stagger-1 {
+  animation-delay: 40ms;
+}
+
+.hero-stagger-2 {
+  animation-delay: 120ms;
+}
+
+.hero-stagger-3 {
+  animation-delay: 200ms;
+}
+
+.hero-stagger-4 {
+  animation-delay: 280ms;
+}
+
+.scroll-cue-indicator {
+  animation: scrollCueSlide 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.lightbox-backdrop-enter {
+  animation: lightboxFadeIn 220ms ease-out forwards;
+}
+
+/* Simplify motion on small mobile screens for crisp responsiveness */
+@media (max-width: 639px) {
+  .hero-zoom {
+    animation: none;
+  }
+  .hero-stagger-1,
+  .hero-stagger-2,
+  .hero-stagger-3,
+  .hero-stagger-4 {
+    animation-duration: 380ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  :root {
+    scroll-behavior: auto;
+  }
+  .hero-zoom,
+  .hero-stagger-1,
+  .hero-stagger-2,
+  .hero-stagger-3,
+  .hero-stagger-4,
+  .scroll-cue-indicator,
+  .lightbox-backdrop-enter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .reveal-item {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #EEE9DE;
+}
+::-webkit-scrollbar-thumb {
+  background: #A8B5A0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #183D32;
+}
+
+/* Print stylesheet: clean editorial stay summary & contact reference */
+@media print {
+  @page {
+    size: auto;
+    margin: 1.35cm 1.5cm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #252824 !important;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  /* Ensure all scroll-reveal and staggered elements are visible even if not scrolled */
+  .reveal-item,
+  .hero-zoom,
+  .hero-stagger-1,
+  .hero-stagger-2,
+  .hero-stagger-3,
+  .hero-stagger-4,
+  .lightbox-backdrop-enter {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Hide fixed navigation chrome, floating CTAs, progress bars, scroll cues, and filter tabs */
+  header,
+  #mobile-navigation-drawer,
+  .fixed[aria-hidden="true"],
+  [aria-label="Back to top"],
+  a[aria-label^="Book your stay"],
+  [aria-label="Scroll to discover more"],
+  .scroll-cue-indicator,
+  [role="tablist"],
+  #contact .lg\:col-span-7,
+  section[aria-label="Tagaytay Atmospheric Editorial Preview"] {
+    display: none !important;
+  }
+
+  /* Reset backgrounds and dark surfaces to crisp ink-friendly white */
+  section,
+  footer,
+  main,
+  #home,
+  #contact .bg-\[\#183D32\],
+  .bg-\[\#F7F5EF\],
+  .bg-\[\#EEE9DE\],
+  .bg-\[\#102B24\],
+  .bg-\[\#183D32\] {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #252824 !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure light text used on dark hero/footer/CTA banners prints with high contrast */
+  #home *,
+  footer *,
+  #contact .bg-\[\#183D32\] *,
+  section[aria-label="Final Booking Call to Action"] * {
+    color: #252824 !important;
+  }
+
+  /* Compact the hero into a clean printed property header */
+  #home {
+    min-height: auto !important;
+    padding: 0 0 1.25rem 0 !important;
+    border-bottom: 1.5pt solid #183D32 !important;
+  }
+
+  #home > div.absolute,
+  section[aria-label="Final Booking Call to Action"] > div.absolute {
+    display: none !important;
+  }
+
+  /* Tighten section spacing for compact multi-page pagination */
+  section {
+    padding-top: 1.35rem !important;
+    padding-bottom: 1.35rem !important;
+    border-bottom: 0.75pt solid #d6cfc2 !important;
+  }
+
+  footer {
+    padding-top: 1.25rem !important;
+    padding-bottom: 0.5rem !important;
+    border-top: 1.5pt solid #183D32 !important;
+  }
+
+  /* Expand all FAQ accordion answers so every house policy prints clearly */
+  #faq [role="region"] {
+    grid-template-rows: 1fr !important;
+    opacity: 1 !important;
+  }
+
+  /* Keep cards, addresses, contact blocks, and room summaries intact across page breaks */
+  article,
+  address,
+  blockquote,
+  .rounded-xl,
+  .rounded-lg,
+  #contact .lg\:col-span-5 > div {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #d6cfc2 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+    color: #252824 !important;
+  }
+
+  /* Cap printed image heights so photography complements details without wasting paper */
+  img {
+    max-height: 180px !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Display full URLs on key reservation and map links for offline reference */
+  #contact a[href^="http"]::after,
+  #location a[href^="http"]::after,
+  #home a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8.5pt;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: break-all;
+    color: #183D32 !important;
+  }
+
+  /* Hide non-essential gallery grid in print to prioritize stay details & contacts */
+  #gallery {
+    display: none !important;
+  }
+}
+
